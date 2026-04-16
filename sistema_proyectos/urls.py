@@ -1,0 +1,13 @@
+from django.contrib import admin
+from django.urls import path
+from django.contrib.auth import views as auth_views
+from gestion_tareas import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
+    path('cuenta/<int:cuenta_id>/', views.detalle_cuenta, name='detalle_cuenta'),
+]

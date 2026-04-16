@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalle de Cuenta</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <style>
+    .home-page { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    .home-card { width: 100%; max-width: 600px; background: #fff; border-radius: 20px; padding: 32px; box-shadow: 0 10px 30px rgba(31, 38, 135, 0.12); border: 1px solid rgba(202, 196, 208, 0.4); text-align: left; }
+    .btn-secondary { background: #e3f2fd; color: #1c1b1f; text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; display: inline-block; margin-bottom: 20px; border: 1px solid #cac4d0; }
+    .btn-secondary:hover { background: #d0e7f9; }
+  </style>
+</head>
+<body>
+  <main class="home-page">
+    <section class="home-card">
+      <a href="{% url 'home' %}" class="btn-secondary">← Volver a Mis Cuentas</a>
+
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <h1 style="color: #6750a4; margin-top: 0;">{{ cuenta.nombre_cuenta }}</h1>
+        <h2 style="margin: 0; color: #1c1b1f;">${{ cuenta.saldo }}</h2>
+      </div>
+      <hr style="border: 1px solid #efe7ff; margin: 20px 0;">
+
+      <div style="background: #f6f3fb; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+        <h3 style="margin-top: 0;">Registrar Transacción</h3>
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn-primary" style="width: 100%; min-height: 40px;">Guardar Transacción</button>
+        </form>
+      </div>
+
+      <h3>Historial de Transacciones</h3>
+      {% if transacciones %}
+        <ul style="list-style: none; padding: 0;">
+          {% for transaccion in transacciones %}
+            <li style="padding: 12px; border-bottom: 1px solid #cac4d0; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong style="font-size: 1.1rem; color: #1c1b1f;">{{ transaccion.descripcion }}</strong>
+                <p style="margin: 4px 0 0 0; font-size: 0.8rem; color: #8a8591;">{{ transaccion.fecha|date:"d/m/Y H:i" }}</p>
+                <p style="margin: 2px 0 0 0; font-size: 0.75rem; color: #6750a4;">
+                    {% for cat in transaccion.categorias.all %} #{{ cat.nombre }} {% endfor %}
+                </p>
+              </div>
+              <div>
+                {% if transaccion.tipo == 'ingreso' %}
+                  <span style="color: #146c2e; font-weight: bold; font-size: 1.1rem;">+${{ transaccion.monto }}</span>
+                {% else %}
+                  <span style="color: #b3261e; font-weight: bold; font-size: 1.1rem;">-${{ transaccion.monto }}</span>
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p style="color: #8a8591;">No hay transacciones registradas. ¡Agrega la primera!</p>
+      {% endif %}
+    </section>
+  </main>
+</body>
+</html>

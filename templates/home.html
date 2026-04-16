@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Billetera - Alke Wallet</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <style>
+    .home-page { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    .home-card { width: 100%; max-width: 520px; background: #fff; border-radius: 20px; padding: 32px; box-shadow: 0 10px 30px rgba(31, 38, 135, 0.12); border: 1px solid rgba(202, 196, 208, 0.4); text-align: center; }
+    .home-card h1 { margin-bottom: 12px; }
+    .home-user { background: #f6f3fb; border-radius: 12px; padding: 16px; margin: 20px 0; text-align: left; }
+    .logout-btn { min-height: 48px; border: none; border-radius: 999px; background: #6750a4; color: white; padding: 0 24px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.25s ease; }
+    .logout-btn:hover { background: #5b4692; }
+  </style>
+</head>
+<body>
+  <main class="home-page">
+    <section class="home-card" style="max-width: 600px;">
+      <h1>¡Hola, {{ user.username }}!</h1>
+      <div class="home-user" style="font-size: 0.9rem;">
+        <p><strong>Último acceso a Alke Wallet:</strong> {{ user.last_login|date:"d/m/Y H:i" }}</p>
+      </div>
+
+      <div style="background: #efe7ff; padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: left;">
+        <h3 style="margin-top: 0; color: #6750a4;">Abrir Nueva Cuenta</h3>
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn-primary" style="width: 100%; min-height: 40px;">Crear Cuenta</button>
+        </form>
+      </div>
+
+      <div style="text-align: left; margin-bottom: 20px;">
+        <h3 style="color: #49454f; border-bottom: 2px solid #cac4d0; padding-bottom: 8px;">Mis Cuentas Activas</h3>
+        {% if cuentas %}
+          <ul style="list-style: none; padding: 0;">
+            {% for cuenta in cuentas %}
+              <li style="background: #f6f3fb; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid #6750a4; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <h4 style="margin: 0 0 5px 0;">
+                    <a href="{% url 'detalle_cuenta' cuenta.id %}" style="color: #6750a4; text-decoration: none;">{{ cuenta.nombre_cuenta }}</a>
+                  </h4>
+                  <small style="color: #8a8591;">Creada: {{ cuenta.creada_en|date:"d/m/Y" }}</small>
+                </div>
+                <div><strong style="font-size: 1.2rem; color: #1c1b1f;">${{ cuenta.saldo }}</strong></div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p style="color: #8a8591; text-align: center; margin-top: 20px;">Aún no tienes cuentas registradas.</p>
+        {% endif %}
+      </div>
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">Cerrar sesión</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
