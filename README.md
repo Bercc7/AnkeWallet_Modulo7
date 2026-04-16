@@ -1,34 +1,21 @@
-# Sistema de Gestión de Proyectos y Tareas
+# Alke Wallet
 
-Una aplicación web desarrollada con Django para gestionar proyectos personales y tareas asociadas. Este proyecto implementa autenticación segura, operaciones CRUD y un panel de administración personalizado.
+Alke Wallet es una billetera digital desarrollada en Python y Django, creada para gestionar activos financieros personales. Permite registrar múltiples cuentas, controlar ingresos y egresos, y categorizar transacciones.
 
-## 🚀 Características Principales
-* **Autenticación de Usuarios:** Sistema de Login, Logout y protección de rutas mediante `@login_required`.
-* **Gestión de Proyectos:** Los usuarios pueden crear y visualizar sus propios proyectos.
-* **Gestión de Tareas:** Cada proyecto contiene tareas independientes que pueden marcarse como "Pendientes" o "Completadas".
-* **Seguridad:** Aislamiento de datos (un usuario no puede ver ni modificar los proyectos de otro).
-* **Panel de Administración:** Interfaz administrativa de Django personalizada con barras de búsqueda y filtros.
+## Funcionalidades
+* Autenticación de usuarios nativa de Django.
+* Operaciones CRUD para cuentas y transacciones.
+* Relaciones de base de datos robustas (1:1, 1:N, N:N).
+* Consultas personalizadas y cálculo de saldos dinámicos con el ORM.
 
-## 🛠️ Tecnologías Utilizadas
-* Python
-* Django (Framework MVT)
-* SQLite (Base de datos por defecto)
-* HTML/CSS (Diseño frontend)
+## Instalación y ejecución local
+1. Clonar el repositorio: `git clone https://github.com/Bercc7/AnkeWallet_Modulo7.git`
+2. Crear y activar entorno virtual: `python -m venv venv`
+3. Instalar dependencias: `pip install django`
+4. Crear base de datos: `python manage.py migrate`
+5. Ejecutar servidor: `python manage.py runserver`
 
-## ⚙️ Instalación y Ejecución
+## Acceder a la aplicación:
 
-Sigue estos pasos para ejecutar el proyecto en tu máquina local:
-
-1. **Crear y activar el entorno virtual:**
-   ```bash
-   python -m venv venv
-   # En Windows:
-   venv\Scripts\activate
-   # En Mac/Linux:
-   source venv/bin/activate
-
-Acceder a la aplicación:
-
-    Frontend: http://127.0.0.1:8000/login/
-
-    Panel Admin: http://127.0.0.1:8000/admin/
+Frontend: http://127.0.0.1:8000/login/
+Panel Admin: http://127.0.0.1:8000/admin/

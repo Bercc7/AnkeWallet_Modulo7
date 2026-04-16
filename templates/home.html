@@ -33,13 +33,11 @@
       </div>
 
       <div style="text-align: left; margin-bottom: 20px;">
-        <h3 style="color: #49454f; border-bottom: 2px solid #cac4d0; padding-bottom: 8px;">Mis Cuentas Activas</h3>
-        <div style="text-align: left; margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #cac4d0; padding-bottom: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #cac4d0; padding-bottom: 8px; margin-bottom: 15px;">
             <h3 style="color: #49454f; margin: 0;">Mis Cuentas Activas</h3>
             <h3 style="color: #6750a4; margin: 0;">Total: ${{ total_general }}</h3>
         </div>
-        
+
         {% if cuentas %}
           <ul style="list-style: none; padding: 0;">
             {% for cuenta in cuentas %}
