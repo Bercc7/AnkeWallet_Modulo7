@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Cuenta, Transaccion, Cliente
@@ -7,6 +8,7 @@ from .forms import CuentaForm, TransaccionForm
 def home(request):
     cliente, created = Cliente.objects.get_or_create(usuario=request.user)
     cuentas = Cuenta.objects.filter(cliente=cliente)
+    total_general = cuentas.aggregate(Sum('saldo'))['saldo__sum'] or 0.00
 
     if request.method == 'POST':
         form = CuentaForm(request.POST)
@@ -18,7 +20,11 @@ def home(request):
     else:
         form = CuentaForm()
 
-    return render(request, 'home.html', {'cuentas': cuentas, 'form': form})
+    return render(request, 'home.html', {
+        'cuentas': cuentas, 
+        'form': form,
+        'total_general': total_general
+    })
 
 @login_required
 def detalle_cuenta(request, cuenta_id):
