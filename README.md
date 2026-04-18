@@ -54,7 +54,7 @@ Si deseas probar el proyecto en tu entorno local, sigue estos pasos:
 1. **Clonar el repositorio:**
    ```bash
    git clone https://github.com/Bercc7/AlkeWallet_Billetera-Digital.git
-   cd AnkeWallet_Modulo7
+   cd AlkeWallet_Billetera-Digital
 
 Crear y activar entorno virtual:
 Bash
