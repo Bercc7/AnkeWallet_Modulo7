@@ -61,29 +61,29 @@ Bash
 
 python -m venv venv
 # En Windows:
-venv\Scripts\activate
+      venv\Scripts\activate
 # En macOS/Linux:
-source venv/bin/activate
+      source venv/bin/activate
 
 # Instalar dependencias:
-Bash
+      Bash
 
-pip install django
+      pip install django
 
 # Aplicar migraciones y crear base de datos:
-Bash
+      Bash
 
-python manage.py migrate
+      python manage.py migrate
 
 # (Opcional) Crear un superusuario para acceder al panel admin:
-Bash
+      Bash
 
-python manage.py createsuperuser
+      python manage.py createsuperuser
 
 # Ejecutar el servidor de desarrollo:
-Bash
+      Bash
 
-python manage.py runserver
+      python manage.py runserver
 
 # Acceder a la aplicación:
 
