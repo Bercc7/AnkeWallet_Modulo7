@@ -65,27 +65,27 @@ venv\Scripts\activate
 # En macOS/Linux:
 source venv/bin/activate
 
-Instalar dependencias:
+# Instalar dependencias:
 Bash
 
 pip install django
 
-Aplicar migraciones y crear base de datos:
+# Aplicar migraciones y crear base de datos:
 Bash
 
 python manage.py migrate
 
-(Opcional) Crear un superusuario para acceder al panel admin:
+# (Opcional) Crear un superusuario para acceder al panel admin:
 Bash
 
 python manage.py createsuperuser
 
-Ejecutar el servidor de desarrollo:
+# Ejecutar el servidor de desarrollo:
 Bash
 
 python manage.py runserver
 
-Acceder a la aplicación:
+# Acceder a la aplicación:
 
     Frontend / Login: http://127.0.0.1:8000/login/
 
